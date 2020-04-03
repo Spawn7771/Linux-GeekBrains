@@ -1,0 +1,54 @@
+1) ls /etc /proc /home
+
+cat /etc/* 2>/dev/null 
+cat /home/* 2>/dev/null 
+cat /proc/* 2>/dev/null
+
+cat /etc/nanorc
+cat /etc/rpc
+
+2) cat
+Print and concatenate files.
+cat > file1.txt
+text1
+CTRL+d
+spawn-VirtualBox% cat > file2.txt
+text2
+CTRL+d
+
+cat file1.txt file2.txt > file3
+cat file3 
+text1
+text2
+
+mv file3 file4
+
+3)
+cd ./folder1 
+touch 1.txt 2.txt 3.txt & mkdir newdir
+mv 1.txt 2.txt 3.txt ./newdir
+
+rm -r ./folder1
+
+4) ls -la | wc -l
+40
+
+5)cat /etc/* 2>~/errors_cat_etc1 | wc -l
+7404
+
+6) ps -ef | grep mc
+
+spawn    16268 15805  0 02:28 pts/3    00:00:00 mc
+spawn    16279 12077  0 02:28 pts/1    00:00:00 grep mc
+
+KILL -9 (KILL)  15915 (немедленно прекратить выполнение)
+KILL -15 (TERM) (Корректно завершить выполнение) - ^D
+KILL -2 (INT) (Прекратить выполнение) - ^C (Ctrl+C)
+KILL -19 (STOP) (Приостановить выполнение) - ^Z
+KILL -18 (CONT) (Продолжить работу приостановленного процесса)
+
+10)
+ls -lA | cut -d " " -f1
+ls -lA | cut -d " " -f1 | sort | uniq
+ls -lA | cut -d " " -f1 | sort | uniq | wc -l
+ls -lA | cut -d " " -f1 | sort | uniq | grep -v итого | wc -l
