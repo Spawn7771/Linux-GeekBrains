@@ -12,7 +12,7 @@ Print and concatenate files.
 cat > file1.txt
 text1
 CTRL+d
-spawn-VirtualBox% cat > file2.txt
+cat > file2.txt
 text2
 CTRL+d
 
@@ -27,7 +27,7 @@ mv file3 file4
 cd ./folder1 
 touch 1.txt 2.txt 3.txt & mkdir newdir
 mv 1.txt 2.txt 3.txt ./newdir
-
+cd ../
 rm -r ./folder1
 
 4) ls -la | wc -l
