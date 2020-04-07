@@ -30,8 +30,8 @@ mv 1.txt 2.txt 3.txt ./newdir
 cd ../
 rm -r ./folder1
 
-4) ls -la | wc -l
-40
+4) ls -A | grep '^\.' 
+21
 
 5)cat /etc/* 2>~/errors_cat_etc1 | wc -l
 7404
@@ -51,4 +51,4 @@ KILL -18 (CONT) (Продолжить работу приостановленн�
 ls -lA | cut -d " " -f1
 ls -lA | cut -d " " -f1 | sort | uniq
 ls -lA | cut -d " " -f1 | sort | uniq | wc -l
-ls -lA | cut -d " " -f1 | sort | uniq | grep -v итого | wc -l
+ls -lA | cut -d " " -f1 | sort | uniq | grep -v итого | wc -l (можно uniq -a)
