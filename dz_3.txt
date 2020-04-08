@@ -1,0 +1,68 @@
+touch file1
+echo "preved medved" > file1 
+cp file1 file2
+ln -s file1 file3
+ln file1 file4
+spawn@spawn-VirtualBox:~/dz_3$ ls -li
+итого 12
+262248 -rw-rw-r-- 2 spawn spawn 14 апр  8 15:47 file1
+262249 -rw-rw-r-- 1 spawn spawn 14 апр  8 15:48 file2
+262250 lrwxrwxrwx 1 spawn spawn  5 апр  8 15:48 file3 -> file1
+262248 -rw-rw-r-- 2 spawn spawn 14 апр  8 15:47 file4
+rm file1
+осталось битая ссылка file3, а также file4
+
+cat file2 
+preved medved
+
+cat file3 
+cat: file3: Нет такого файла или каталога
+
+cat file4
+preved medved
+
+
+mv file2 my_file2
+mv file4 my_file4
+touch my_file1
+ln -sf /home/spawn/dz_3/my_file1 ./file3
+
+mkdir onemoredir
+mv file3 ./onemoredir/
+ln -s /home/spawn/dz_3/my_file1 my_link_file4
+mv my_link_file4 ./onemoredir/
+
+touch 111.txt 222.txt
+права на чтение, запись для владельца и группы, только на чтение для всех
+
+chmod ug+rw 111.txt
+chmod o+r 111.txt
+
+в числовом виде:
+chmod 664 111.txt 
+
+права на чтение, запись — только для владельца
+
+chmod u+rw 222.txt 
+chmod go-rwx 222.txt
+
+в числовом виде:
+chmod 600 222.txt 
+
+sudo adduser testovich
+sudo usermod -aG sudo testovich
+
+
+groupadd developer
+sudo useradd -m -G developer -s /bin/bash sidorov
+sudo useradd -m -G developer -s /bin/bash perov
+
+umask 002
+mkdir developer_dir
+sudo chown spawn:developer -R ./developer_dir/ либо сhgrp -R developer ./developer_dir/
+chmod g+s developer_dir/
+
+
+chmod +t ./newdirdev/
+
+chmod -x ./strangedir/
