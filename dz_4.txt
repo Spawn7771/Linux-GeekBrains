@@ -1,0 +1,119 @@
+Написать скрипт, который удаляет из текстового файла пустые строки и заменяет маленькие символы на большие (воспользуйтесь tr или sed).
+
+cat example.txt 
+privet 
+lsdjflsdfjlskj 
+
+sldjglskj
+RRlsdkjlsdkl_dksjflsdj_RR
+
+
+2342526
+
+sldkgjsld
+
+////////////////
+
+	cat example.txt | sed 's/.*/\U&/; /./!d; ' > result4.txt
+
+/////////////////
+cat result4.txt 
+PRIVET 
+LSDJFLSDFJLSKJ 
+SLDJGLSKJ
+RRLSDKJLSDKL_DKSJFLSDJ_RR
+2342526
+SLDKGJSLD
+
+
+-------------------------------------------
+Создать скрипт, который создаст директории для нескольких годов (2010 — 2017), в них — поддиректории для месяцев (от 01 до 12), и в каждый из них запишет несколько файлов с произвольными записями (например, 001.txt, содержащий текст«Файл 001», 002.txt с текстом Файл 002) и т. д.
+
+
+script_creator.sh
+
+#!/bin/bash
+
+#mkdir -p {2010..2017}/{01..12}; 
+
+
+for i in {2010..2017}
+
+do
+        mkdir $i
+                for b in {01..12}
+
+                do
+                        cd $i;
+                        mkdir $b;
+                        cd $b;
+                        echo "File0"$b >> file0$b.txt;
+                        cd ..
+        done
+        cd ..
+done
+
+
+-----------------------------------------------
+ * Создать файл crontab, который ежедневно регистрирует занятое каждым пользователем дисковое пространство в его домашней директории. 
+
+cat size.sh 
+
+#!/bin/bash
+
+
+du -sh /home/{sidorov,perov,testovich,spawn} >> /root/zanyato.txt
+
+
+crontab -l
+* * 1 * * /root/size.sh
+
+
+
+-----------------------------------------------------------
+ Создать скрипт ownersort.sh, который в заданной папке копирует файлы в директории, названные по имени владельца каждого файла. Учтите, что файл должен принадлежать соответствующему владельцу. 
+
+так и не получилось сделать так чтобы заработал скрипт до конца (папки с именами владельцев создаются а вот с копированием так и не получилось)
+
+
+#!/bin/bash -x
+a=$1
+if [ -z $a ]
+ then
+	echo "Вы забыли указать директорию"
+	exit
+ else
+	
+	mkdir $a
+	ls -lA | cut -f3 -d " " | sort | uniq > owners.txt
+	#brt=$(ls -l | awk '{print $3}')
+	ls -l | awk '{print $3, $9}' > name_files
+	cp name_files "$a"
+	filecnt= $(ls -l | wc -l > files_count.txt)
+	cat ./owners.txt | wc -l > numbers.txt
+	cnt=`cat numbers.txt`
+
+for z in `seq 2 $filecnt`
+	do
+
+	for i in `seq 2 $cnt`
+		do
+			own=$(sed -n $i"p" owners.txt);
+			namefiles=$(awk 'NR=='"$z"' {print $1}' name_files);
+			cd $a;
+			mkdir "$own";
+			#cp name_files "$own"
+			if [ "$own" == "$namefiles" ] 		      	
+		       		then
+					hh=$(awk 'NR=='"$z"' {print $2}' name_files);
+					#echo $hh
+
+					cp -r ../"$hh" "$own"
+				
+			fi
+			cd ..  
+		done	
+done
+fi
+
+
