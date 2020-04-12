@@ -65,4 +65,4 @@ chmod g+s developer_dir/
 
 chmod +t ./newdirdev/
 
-chmod -x ./strangedir/
+chmod 711 ./strangedir/ - главный смысл убрать право на чтение
