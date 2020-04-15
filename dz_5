@@ -1,4 +1,6 @@
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -p tcp --dport 443 -j ACCEPT
+можно было верхние 2 правила сделать так : -A INPUT -p tcp -m conntrack --ctstate NEW -m multiport --dports 80,443 -j ACCEPT 
 iptables -A INPUT -s 192.168.1.0/24 -j ACCEPT
 iptables -P INPUT DROP
+iptables -P OUTPUT ACCEPT
